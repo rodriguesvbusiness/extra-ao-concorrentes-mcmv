@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Marca — Construtora MCMV · RODRI Brand Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & BASE ───────────────────────────────── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --preto:#111010;
+    --branco:#FAFAF7;
+    --areia:#F0EBE1;
+    --areia2:#E5DDD0;
+    --cinza:#7A766E;
+    --cinza2:#B5B0A8;
+    --borda:#DDD8CE;
+    --acento:#C97D3A;
+    --teal:#1D9E75;
+    --teal-bg:#E6F5EF;
+    /* Players */
+    --telesil:#F26522;
+    --telesil-bg:#FEF1E8;
+    --telesil-borda:#F9B48A;
+    --rocha:#BE2E36;
+    --rocha-bg:#FCEBEC;
+    --rocha-borda:#E8999D;
+    --vella:#5A5650;
+    --vella-bg:#EEECEA;
+    --vella-borda:#B8B4AE;
+    --lavie:#1C1C1C;
+    --lavie-bg:#E8E8E6;
+    --lavie-borda:#8A8882;
+    --nova:#1D9E75;
+    --nova-bg:#E1F5EE;
+    --nova-borda:#6DCBAA;
+    --sidebar:220px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--areia);
+    color:var(--preto);
+    line-height:1.6;
+    font-size:15px;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────── */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);
+    background:var(--preto);
+    padding:28px 0;
+    overflow-y:auto;
+    z-index:100;
+    display:flex;flex-direction:column;
+  }
+  .sidebar-logo{
+    padding:0 20px 24px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    margin-bottom:20px;
+  }
+  .sidebar-logo .studio{font-size:10px;letter-spacing:.12em;color:var(--acento);font-weight:600;text-transform:uppercase}
+  .sidebar-logo .proj{font-size:13px;color:rgba(255,255,255,.7);margin-top:4px;line-height:1.4}
+  .nav-group{padding:0 12px;margin-bottom:8px}
+  .nav-label{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;padding:4px 8px;margin-bottom:4px}
+  .nav-item{
+    display:block;padding:7px 10px;border-radius:6px;
+    color:rgba(255,255,255,.55);font-size:12.5px;
+    text-decoration:none;transition:all .2s;
+    border-left:2px solid transparent;
+  }
+  .nav-item:hover{color:#fff;background:rgba(255,255,255,.07)}
+  .nav-item.active{color:#fff;background:rgba(255,255,255,.1);border-left-color:var(--acento)}
+  .nav-player{display:flex;align-items:center;gap:7px}
+  .nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .sidebar-footer{margin-top:auto;padding:16px 20px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .sidebar-footer p{font-size:11px;color:rgba(255,255,255,.3);line-height:1.5}
+
+  /* ── MAIN ────────────────────────────────────────── */
+  .main{margin-left:var(--sidebar);min-height:100vh}
+
+  /* ── HERO ────────────────────────────────────────── */
+  .hero{
+    background:var(--preto);color:var(--branco);
+    padding:72px 64px 56px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;top:-40px;right:-60px;
+    width:400px;height:400px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,125,58,.18) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .hero-eyebrow{font-size:11px;letter-spacing:.14em;color:var(--acento);text-transform:uppercase;font-weight:600;margin-bottom:16px}
+  .hero-title{font-family:'DM Serif Display',serif;font-size:48px;line-height:1.05;margin-bottom:16px;max-width:700px}
+  .hero-title em{color:var(--acento);font-style:italic}
+  .hero-sub{font-size:16px;color:rgba(255,255,255,.55);max-width:580px;line-height:1.65;margin-bottom:32px}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap}
+  .hero-meta-item{display:flex;flex-direction:column;gap:3px}
+  .hero-meta-item span:first-child{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase}
+  .hero-meta-item span:last-child{font-size:13px;color:rgba(255,255,255,.7)}
+  .hero-note{
+    margin-top:36px;padding:14px 18px;
+    border-left:3px solid var(--acento);
+    background:rgba(201,125,58,.1);border-radius:0 6px 6px 0;
+    font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;max-width:640px;
+  }
+
+  /* ── SECTIONS ────────────────────────────────────── */
+  .section{padding:56px 64px;border-bottom:1px solid var(--borda)}
+  .section:last-child{border-bottom:none}
+  .section-num{font-size:11px;letter-spacing:.1em;color:var(--acento);text-transform:uppercase;font-weight:600;margin-bottom:8px;font-family:'DM Mono',monospace}
+  .section-title{font-family:'DM Serif Display',serif;font-size:32px;color:var(--preto);margin-bottom:8px;line-height:1.2}
+  .section-desc{font-size:15px;color:var(--cinza);max-width:660px;line-height:1.65;margin-bottom:36px}
+
+  /* ── MAPA COMPETITIVO ────────────────────────────── */
+  .mapa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:32px}
+  .mapa-card{
+    border-radius:10px;padding:20px;
+    border:1px solid var(--borda);
+    background:var(--branco);
+    position:relative;overflow:hidden;
+  }
+  .mapa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .mapa-card.telesil::before{background:var(--telesil)}
+  .mapa-card.rocha::before{background:var(--rocha)}
+  .mapa-card.vella::before{background:var(--vella)}
+  .mapa-card.lavie::before{background:var(--lavie)}
+  .mapa-badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:.04em;display:inline-block;margin-bottom:10px}
+  .mapa-card h3{font-size:17px;font-weight:600;margin-bottom:4px}
+  .mapa-card p{font-size:12px;color:var(--cinza);line-height:1.5}
+  .mapa-card .mapa-role{margin-top:10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+  /* ── BENCHMARK TABS ──────────────────────────────── */
+  .tabs{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+  .tab{
+    padding:8px 16px;border-radius:20px;font-size:13px;font-weight:500;
+    border:1.5px solid var(--borda);background:transparent;
+    cursor:pointer;transition:all .2s;color:var(--cinza);
+  }
+  .tab.active{border-color:transparent;color:#fff}
+  .tab[data-player="telesil"].active{background:var(--telesil)}
+  .tab[data-player="rocha"].active{background:var(--rocha)}
+  .tab[data-player="vella"].active{background:var(--vella)}
+  .tab[data-player="lavie"].active{background:var(--lavie)}
+  .player-panel{display:none}
+  .player-panel.active{display:block}
+
+  .player-header{
+    border-radius:12px 12px 0 0;padding:24px 28px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .player-header-left h2{font-family:'DM Serif Display',serif;font-size:28px;color:#fff;margin-bottom:4px}
+  .player-header-left p{font-size:13px;color:rgba(255,255,255,.65)}
+  .player-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .player-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85)}
+  .player-score{text-align:right}
+  .player-score-label{font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:6px}
+  .score-stars{display:flex;gap:4px;justify-content:flex-end}
+  .star{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25)}
+  .star.on{background:#fff}
+
+  .bench-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    border:1px solid var(--borda);border-top:none;border-radius:0 0 12px 12px;
+    overflow:hidden;background:var(--branco);
+  }
+  .bench-item{padding:16px 20px;border-bottom:1px solid var(--borda);border-right:1px solid var(--borda)}
+  .bench-item:nth-child(even){border-right:none}
+  .bench-item:nth-last-child(-n+2){border-bottom:none}
+  .bench-item-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza2);font-weight:600;margin-bottom:5px;font-family:'DM Mono',monospace}
+  .bench-item-val{font-size:13.5px;color:var(--preto);line-height:1.55}
+  .bench-item-val strong{font-weight:600}
+  .bench-item.full{grid-column:1/-1;border-right:none}
+  .bench-item.highlight-good{background:#F0FBF6}
+  .bench-item.highlight-bad{background:#FDF3F3}
+
+  /* ── SÍNTESE COMPARATIVA ─────────────────────────── */
+  .comp-table{width:100%;border-collapse:collapse;font-size:13px}
+  .comp-table th{
+    padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;font-weight:600;background:var(--preto);color:#fff;
+    font-family:'DM Mono',monospace;
+  }
+  .comp-table td{padding:11px 14px;border-bottom:1px solid var(--borda);vertical-align:top;line-height:1.5}
+  .comp-table tr:nth-child(even) td{background:var(--areia)}
+  .comp-table tr:hover td{background:rgba(201,125,58,.06)}
+  .comp-table .col-eixo{font-weight:600;color:var(--cinza);font-size:12px}
+  .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500}
+
+  /* ── LACUNAS ─────────────────────────────────────── */
+  .lacuna-list{display:flex;flex-direction:column;gap:12px}
+  .lacuna{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:16px 20px;border-radius:10px;
+    border:1px solid var(--borda);background:var(--branco);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .lacuna:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .lacuna-num{
+    font-family:'DM Serif Display',serif;font-size:28px;line-height:1;
+    min-width:36px;padding-top:2px;
+  }
+  .lacuna-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
+  .lacuna-body p{font-size:13px;color:var(--cinza);line-height:1.6}
+
+  /* ── IDENTIDADE VISUAL ───────────────────────────── */
+  .id-visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:900px){.id-visual-grid{grid-template-columns:1fr}}
+
+  .iv-card{border-radius:14px;overflow:hidden;border:1px solid var(--borda)}
+  .iv-header{padding:24px;color:#fff;position:relative;overflow:hidden}
+  .iv-header::after{
+    content:'';position:absolute;bottom:-30px;right:-20px;
+    width:120px;height:120px;border-radius:50%;
+    background:rgba(255,255,255,.08);pointer-events:none;
+  }
+  .iv-header-brand{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:8px;font-family:'DM Mono',monospace}
+  .iv-header-name{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:10px}
+  .iv-header-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .iv-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9)}
+
+  /* Swatches */
+  .swatches{display:flex;padding:16px 20px;gap:0;background:var(--branco);border-bottom:1px solid var(--borda)}
+  .swatch{flex:1;height:48px;position:relative;cursor:default;transition:flex .2s}
+  .swatch:hover{flex:2}
+  .swatch::after{
+    content:attr(data-label);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);
+    font-size:10px;color:var(--cinza);white-space:nowrap;font-family:'DM Mono',monospace;
+  }
+  .swatches-wrap{padding-bottom:32px;background:var(--branco);border-bottom:1px solid var(--borda);padding-left:20px;padding-right:20px}
+
+  /* IV rows */
+  .iv-rows{background:var(--branco)}
+  .iv-row{display:flex;gap:0;border-bottom:1px solid var(--borda)}
+  .iv-row:last-child{border-bottom:none}
+  .iv-row-key{
+    min-width:130px;padding:13px 14px;font-size:11px;letter-spacing:.07em;
+    text-transform:uppercase;font-weight:600;color:var(--cinza2);
+    font-family:'DM Mono',monospace;border-right:1px solid var(--borda);
+    background:var(--areia);display:flex;align-items:flex-start;
+  }
+  .iv-row-val{padding:13px 16px;font-size:13px;color:var(--preto);line-height:1.6;flex:1}
+  .iv-row-val strong{font-weight:600;color:var(--preto)}
+  .iv-verdict{
+    padding:14px 16px;font-size:12.5px;line-height:1.6;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .iv-verdict-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+  /* Logo sim */
+  .logo-sim{
+    padding:20px;display:flex;align-items:center;justify-content:center;
+    background:var(--branco);border-bottom:1px solid var(--borda);min-height:80px;
+  }
+  .logo-sim-text{font-family:'DM Serif Display',serif;letter-spacing:.04em}
+
+  /* Nova marca card */
+  .nova-card{
+    grid-column:1/-1;border-radius:14px;overflow:hidden;
+    border:2px solid var(--nova);
+  }
+  .nova-header{
+    background:var(--preto);padding:28px;
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .nova-badge{background:var(--nova);color:#fff;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .nova-header h2{font-family:'DM Serif Display',serif;font-size:28px;color:#fff}
+  .nova-header p{font-size:13px;color:rgba(255,255,255,.55);margin-top:4px}
+  .nova-body{background:var(--branco)}
+  .nova-palette{display:flex;gap:12px;padding:20px 24px;border-bottom:1px solid var(--borda);flex-wrap:wrap;align-items:flex-end}
+  .nova-swatch-wrap{display:flex;flex-direction:column;gap:6px;align-items:center}
+  .nova-swatch{border-radius:8px;border:1px solid rgba(0,0,0,.08)}
+  .nova-swatch-label{font-size:10px;color:var(--cinza);font-family:'DM Mono',monospace;text-align:center}
+  .nova-swatch-hex{font-size:10px;color:var(--cinza2);font-family:'DM Mono',monospace}
+
+  /* ── RODAPÉ ──────────────────────────────────────── */
+  .footer-section{background:var(--preto);padding:40px 64px;color:rgba(255,255,255,.4);font-size:12px}
+  .footer-section strong{color:var(--acento)}
+
+  /* ── HAMBURGUER ──────────────────────────────────── */
+  .mob-bar{
+    display:none;
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:var(--preto);height:52px;
+    align-items:center;justify-content:space-between;
+    padding:0 18px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .mob-bar-brand{font-size:11px;letter-spacing:.1em;color:var(--acento);font-weight:600;text-transform:uppercase}
+  .mob-ham{
+    background:none;border:none;cursor:pointer;
+    display:flex;flex-direction:column;gap:5px;padding:4px;
+  }
+  .mob-ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
+  .mob-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .mob-ham.open span:nth-child(2){opacity:0}
+  .mob-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .sidebar-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;
+  }
+  .sidebar-overlay.visible{display:block}
+
+  /* ── MOBILE ──────────────────────────────────────── */
+  @media(max-width:768px){
+    .mob-bar{display:flex}
+    .sidebar{
+      transform:translateX(-100%);transition:transform .28s ease;
+      top:52px;z-index:160;
+    }
+    .sidebar.open{transform:translateX(0)}
+    .main{margin-left:0;padding-top:52px}
+    .hero{padding:32px 20px 28px}
+    .hero-title{font-size:30px}
+    .hero-sub{font-size:14px}
+    .hero-meta{gap:16px}
+    .section{padding:32px 20px}
+    .section-title{font-size:24px}
+    .id-visual-grid{grid-template-columns:1fr !important}
+    .bench-grid{grid-template-columns:1fr !important}
+    .bench-item:nth-last-child(-n+2){border-bottom:1px solid var(--borda)}
+    .bench-item:nth-child(even){border-right:1px solid var(--borda)}
+    .comp-table{font-size:11px}
+    .comp-table th,.comp-table td{padding:7px 8px}
+    .tabs{gap:5px}
+    .tab{font-size:12px;padding:6px 12px}
+    .player-header{padding:18px}
+    .player-header-left h2{font-size:22px}
+    .score-stars{justify-content:flex-start;margin-top:4px}
+    .lacuna{gap:10px}
+    .lacuna-num{font-size:22px;min-width:28px}
+    .footer-section{padding:28px 20px}
+  }
+
+  /* ── PRINT ───────────────────────────────────────── */
+  @media print{
+    .sidebar{display:none}
+    .mob-bar{display:none}
+    .main{margin-left:0;padding-top:0}
+    .section{padding:32px 40px}
+    .hero{padding:40px}
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE BAR -->
+<div class="mob-bar">
+  <div class="mob-bar-brand">RODRI · Diagnóstico MCMV</div>
+  <button class="mob-ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" aria-label="Navegação do relatório">
+  <div class="sidebar-logo">
+    <div class="studio">RODRI Brand Studio</div>
+    <div class="proj">Diagnóstico de Marca<br>Construtora MCMV · 2026</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Diagnóstico</div>
+    <a href="#contexto" class="nav-item active">01 · Contexto</a>
+    <a href="#mapa" class="nav-item">02 · Mapa Competitivo</a>
+    <a href="#benchmark" class="nav-item">03 · Benchmarking</a>
+    <a href="#sintese" class="nav-item">04 · Síntese Comparativa</a>
+    <a href="#lacunas" class="nav-item">05 · Lacunas de Mercado</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Identidade Visual</div>
+    <a href="#iv-telesil" class="nav-item">
+      <span class="nav-player"><span class="nav-dot" style="background:var(--telesil)"></span>Telesil</span>
+    </a>
+    <a href="#iv-rocha" class="nav-item">
+      <span class="nav-player"><span class="nav-dot" style="background:var(--rocha)"></span>Rocha</span>
+    </a>
+    <a href="#iv-vella" class="nav-item">
+      <span class="nav-player"><span class="nav-dot" style="background:var(--vella)"></span>Vella</span>
+    </a>
+    <a href="#iv-lavie" class="nav-item">
+      <span class="nav-player"><span class="nav-dot" style="background:var(--lavie)"></span>Lavie</span>
+    </a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Entrega</div>
+  </div>
+
+  <div class="sidebar-footer">
+    <p>MÉTODO VISION® · Fase 2<br>Maio 2026</p>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Relatório de Diagnóstico de Marca</div>
+    <h1 class="hero-title">Construtora MCMV<br><em>Maceió, Alagoas</em></h1>
+    <p class="hero-sub">Benchmarking competitivo completo + análise de identidade visual do mercado. Base para as decisões de naming e identidade da nova construtora Faixa 2.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span>Clientes</span><span>Mozartt & Marianna Balbino</span></div>
+      <div class="hero-meta-item"><span>Fase</span><span>MÉTODO VISION® · Etapa 2</span></div>
+      <div class="hero-meta-item"><span>Data</span><span>Maio 2026</span></div>
+      <div class="hero-meta-item"><span>Status</span><span>Pré-naming</span></div>
+    </div>
+    <div class="hero-note">
+      <strong style="color:var(--acento)">Nota:</strong> O posicionamento estratégico será apresentado em documento separado, após validação do naming. Este relatório cobre benchmarking e identidade visual.
+    </div>
+  </div>
+
+  <!-- 01 CONTEXTO -->
+  <section class="section" id="contexto">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Contexto e Metodologia</h2>
+    <p class="section-desc">Este diagnóstico é resultado da extração externa realizada após a sessão de imersão interna com os sócios em maio de 2026. Quatro concorrentes foram analisados em profundidade com base em seis eixos por player.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Posicionamento</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Proposta de valor e diferencial percebido de cada player no mercado.</p>
+      </div>
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Identidade Visual</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Cores, tipografia, logo, estilo e direção criativa de cada marca.</p>
+      </div>
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Tom de Voz</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Linguagem, vocabulário, tom e integração verbal-visual.</p>
+      </div>
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Presença Digital</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Canais, frequência, tipo de conteúdo e audiência construída.</p>
+      </div>
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Portfólio</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Produtos, faixas, bairros de atuação e naming de empreendimentos.</p>
+      </div>
+      <div style="background:var(--branco);border-radius:10px;padding:18px;border:1px solid var(--borda)">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:8px">Reputação</div>
+        <p style="font-size:13px;color:var(--cinza);line-height:1.6">Reclamações, certificações e percepção pública.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:var(--areia2);border-radius:8px;border-left:3px solid var(--acento);font-size:13px;color:var(--cinza);line-height:1.6">
+      <strong style="color:var(--preto)">Nota metodológica:</strong> Os sites da Telesil e Vella bloquearam acesso automatizado. Os dados visuais foram consolidados via metadados de código-fonte, snippets indexados e depoimentos públicos. Todas as inferências são sinalizadas.
+    </div>
+  </section>
+
+  <!-- 02 MAPA COMPETITIVO -->
+  <section class="section" id="mapa">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Mapa Competitivo Real</h2>
+    <p class="section-desc">Dos quatro concorrentes indicados, apenas dois competem diretamente no MCMV Faixa 2 em Maceió. Os outros dois têm funções distintas neste relatório.</p>
+
+    <div class="mapa-grid">
+      <div class="mapa-card telesil">
+        
+        <h3>Telesil Engenharia</h3>
+        <p>Maceió-AL · Porte médio-grande · MCMV Faixas 1–3 + premium</p>
+        <div class="mapa-role" style="color:var(--telesil)">A referência a superar</div>
+      </div>
+      <div class="mapa-card rocha">
+        
+        <h3>Rocha Empreendimentos</h3>
+        <p>Maceió-AL · Porte médio · MCMV Faixas 2–3 "Premium"</p>
+        <div class="mapa-role" style="color:var(--rocha)">O território a evitar</div>
+      </div>
+      <div class="mapa-card vella">
+        
+        <h3>Vella Engenharia</h3>
+        <p>Maceió-AL · EPP · Segmento não identificado publicamente</p>
+        <div class="mapa-role" style="color:var(--vella)">A ameaça que dorme</div>
+      </div>
+      <div class="mapa-card lavie" style="border-color:var(--lavie-borda)">
+        
+        <h3>Lavie Construções</h3>
+        <p>João Pessoa-PB · Alto padrão · Fora do MCMV</p>
+        <div class="mapa-role" style="color:var(--lavie)">O padrão a aprender</div>
+      </div>
+    </div>
+
+    <div style="padding:16px 20px;background:var(--teal-bg);border-radius:8px;border-left:3px solid var(--teal);font-size:13.5px;color:var(--preto);line-height:1.6">
+      <strong>Lacuna central:</strong> Nenhum player ocupa o território "MCMV popular + marca humana e digital-first". Essa é a oportunidade estratégica que orienta toda a construção da nova marca.
+    </div>
+  </section>
+
+  <!-- 03 BENCHMARKING -->
+  <section class="section" id="benchmark">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Benchmarking por Player</h2>
+    <p class="section-desc">Análise detalhada de cada concorrente nos eixos estratégicos. Clique nas abas para navegar entre os players.</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-player="telesil" role="tab" aria-selected="true">Telesil</button>
+      <button class="tab" data-player="rocha" role="tab" aria-selected="false">Rocha</button>
+      <button class="tab" data-player="vella" role="tab" aria-selected="false">Vella</button>
+      <button class="tab" data-player="lavie" role="tab" aria-selected="false">Lavie</button>
+    </div>
+
+    <!-- TELESIL -->
+    <div class="player-panel active" id="panel-telesil" role="tabpanel">
+      <div class="player-header" style="background:var(--telesil)">
+        <div class="player-header-left">
+          <h2>Telesil Engenharia</h2>
+          <p>Maior construtora MCMV do Nordeste · Maceió-AL desde 1997</p>
+          <div class="player-tags">
+            <span class="player-tag">Faixas 1–3</span>
+            <span class="player-tag">43K seguidores</span>
+            <span class="player-tag">NDT Nível I Caixa</span>
+            <span class="player-tag">Laranja #F26522</span>
+          </div>
+        </div>
+        <div class="player-score">
+          <div class="player-score-label">Presença de marca</div>
+          <div class="score-stars">
+            <div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-item full highlight-good">
+          <div class="bench-item-label">Posicionamento</div>
+          <div class="bench-item-val"><strong>"A melhor construtora do MCMV do Nordeste."</strong> Discurso ancorado em escala, certificação técnica (NDT Nível I — única em AL) e volume: 25 mil unidades no Instagram.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Proposta de valor</div>
+          <div class="bench-item-val">Segurança via escala. Subsídio até R$ 55 mil. Parcela menor que aluguel. Entrada em até 60x. Foco em quem quer sair do aluguel sem complicação.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Público-alvo</div>
+          <div class="bench-item-val">MCMV Faixas 1, 2 e 3. Segmento premium via sub-marca Telesil Mais (Jatiúca, São Miguel dos Milagres).</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Presença digital</div>
+          <div class="bench-item-val">@telesilengenharia — <strong>43 mil seguidores</strong>, 1.673 posts, ritmo quase diário. Depoimentos, obra, lançamentos, certificações, eventos.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Produtos</div>
+          <div class="bench-item-val">44–55 m², 2 quartos, varanda, churrasqueira a gás, elevador. Reserva dos Pássaros, Grand Reserva, Jardim São Gonçalo. Cruz das Almas, Cidade Universitária, Centro.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Reputação</div>
+          <div class="bench-item-val">26 reclamações/12 meses no Reclame Aqui. 100% respondidas, 42,9% resolvidas. Nota 3,79. Volume baixo para a escala.</div>
+        </div>
+        <div class="bench-item highlight-good">
+          <div class="bench-item-label">✦ Ponto forte</div>
+          <div class="bench-item-val">Escala, certificação, capilaridade, diversificação. A cor laranja virou ativo cultural — depoimento real: <em>"vejo muros pintados de laranja e isso me passou credibilidade."</em></div>
+        </div>
+        <div class="bench-item highlight-bad">
+          <div class="bench-item-label">✕ Ponto fraco</div>
+          <div class="bench-item-val">Identidade datada. Laranja saturou o mercado. Sem símbolo proprietário. Comunicação genérica, sem personalidade. Digital sem direção criativa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROCHA -->
+    <div class="player-panel" id="panel-rocha" role="tabpanel">
+      <div class="player-header" style="background:var(--rocha)">
+        <div class="player-header-left">
+          <h2>Rocha Empreendimentos</h2>
+          <p>Desafiante do MCMV Premium · Maceió-AL desde 2010</p>
+          <div class="player-tags">
+            <span class="player-tag">Faixas 2–3</span>
+            <span class="player-tag">MCMV Premium</span>
+            <span class="player-tag">ISO 9001 + PBQP-H A</span>
+            <span class="player-tag">Vermelho #BE2E36</span>
+          </div>
+        </div>
+        <div class="player-score">
+          <div class="player-score-label">Presença de marca</div>
+          <div class="score-stars">
+            <div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star"></div><div class="star"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-item full highlight-good">
+          <div class="bench-item-label">Posicionamento</div>
+          <div class="bench-item-val"><strong>"Evolua o seu sonho — more no melhor MCMV de Alagoas."</strong> Aposta na diferenciação pelo produto: MCMV Premium, com amenities que os grandes players não oferecem.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Proposta de valor</div>
+          <div class="bench-item-val">MCMV com experiência aspiracional: coworking, lavanderia, mercado, academia, espaço pet. Parcelas a partir de R$ 380/mês.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Público-alvo</div>
+          <div class="bench-item-val">MCMV Faixas 2 e 3. Cliente que quer mais do que o básico, mas não pode ou não quer o alto padrão.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Presença digital</div>
+          <div class="bench-item-val"><a href="https://www.instagram.com/meu.rocha/" target="_blank">@meu.rocha</a> — perfil ativo. Facebook: 13 mil curtidas. YouTube: acompanhamento de obra. Moderadamente ativo.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Produtos</div>
+          <div class="bench-item-val">Easy Serraria (R$ 280,4 mil, 38–46 m²), Eco Vittá, Reserva do Parque 2 (entregue). Santa Amélia, Serraria, Santos Dumont.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Reputação</div>
+          <div class="bench-item-val">Zero reclamações no período de 12 meses. ISO 9001:2015 e PBQP-H Nível A. Imagem limpa.</div>
+        </div>
+        <div class="bench-item highlight-good">
+          <div class="bench-item-label">✦ Ponto forte</div>
+          <div class="bench-item-val">Naming de empreendimento mais sofisticado (Easy, Eco, Reserva). Domínio afetivo <strong>meurocha.com.br</strong> — pronome possessivo que cria pertencimento imediato.</div>
+        </div>
+        <div class="bench-item highlight-bad">
+          <div class="bench-item-label">✕ Ponto fraco</div>
+          <div class="bench-item-val">Sem símbolo proprietário. Vermelho pode criar barreira psicológica em público que busca acolhimento. O conceito "Premium" não está sustentado com consistência visual suficiente.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VELLA -->
+    <div class="player-panel" id="panel-vella" role="tabpanel">
+      <div class="player-header" style="background:var(--vella)">
+        <div class="player-header-left">
+          <h2>Vella Engenharia</h2>
+          <p>EPP · Maceió-AL · Fundada 2017 · Presença digital quase nula</p>
+          <div class="player-tags">
+            <span class="player-tag">Capital R$ 200 mil</span>
+            <span class="player-tag">1–10 funcionários</span>
+            <span class="player-tag">Sem site</span>
+            <span class="player-tag">Sem ADEMI-AL</span>
+          </div>
+        </div>
+        <div class="player-score">
+          <div class="player-score-label">Presença de marca</div>
+          <div class="score-stars">
+            <div class="star on"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-item full">
+          <div class="bench-item-label">Situação geral</div>
+          <div class="bench-item-val">Único fragmento indexado: <em>"Por que escolher a Vella? Porque aqui, cada..."</em> — sugere diferenciação por atendimento, mas sem consistência visual ou de marca documentada publicamente.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Dados cadastrais</div>
+          <div class="bench-item-val">CNPJ 29.287.041/0001-92. Fundada 18/12/2017. Sócios: Pedro Baltar Cansanção e Marcelo Machado Melro. Sede no Edifício Premium Office, Mangabeiras.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Presença digital</div>
+          <div class="bench-item-val"><a href="https://www.instagram.com/vellaengenharia.al/" target="_blank">@vellaengenharia.al</a> — perfil ativo. Sem site, sem portfólio no ZAP/Viva Real, sem LinkedIn, sem cobertura de imprensa.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">O paradoxo do nome</div>
+          <div class="bench-item-val">"Vella" é o melhor nome fonético do grupo: 2 sílabas, abertura com V, raiz latina/italiana (vela, bela). Um nome que poderia sustentar uma marca premium — e ninguém fez isso.</div>
+        </div>
+        <div class="bench-item highlight-bad">
+          <div class="bench-item-label">⚠ Risco latente</div>
+          <div class="bench-item-val">Se a Vella investir em identidade visual e comunicação nos próximos 12–18 meses, pode ocupar rapidamente o território que a nova marca pretende ocupar. Monitorar.</div>
+        </div>
+        <div class="bench-item highlight-good">
+          <div class="bench-item-label">✦ Aprendizado</div>
+          <div class="bench-item-val">Ter o melhor nome não basta. A Vella demonstra que um nome forte sem investimento em marca é patrimônio que dorme. Identidade é construção contínua.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAVIE -->
+    <div class="player-panel" id="panel-lavie" role="tabpanel">
+      <div class="player-header" style="background:var(--lavie)">
+        <div class="player-header-left">
+          <h2>Lavie Construções</h2>
+          <p>Alto padrão · João Pessoa-PB · Referência de tom — não concorrente</p>
+          <div class="player-tags">
+            <span class="player-tag">14 anos</span>
+            <span class="player-tag">18K seguidores</span>
+            <span class="player-tag">Alto padrão</span>
+            <span class="player-tag">Preto + laranja</span>
+          </div>
+        </div>
+        <div class="player-score">
+          <div class="player-score-label">Integração verbal/visual</div>
+          <div class="score-stars">
+            <div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star on"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-item full highlight-good">
+          <div class="bench-item-label">Por que está aqui</div>
+          <div class="bench-item-val">A Lavie é a única construtora analisada com integração real entre verbal e visual. Não é concorrente no MCMV, mas é o padrão de referência de marca que o mercado local ainda não atingiu. <strong>O objetivo é aprender a lógica, não copiar a estética.</strong></div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Posicionamento</div>
+          <div class="bench-item-val">"14 anos entregando alto padrão." Manifesto: "Construir prédio é técnica. Construir Lavie é propósito." Marca orientada por conceito antes de produto.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">Presença digital</div>
+          <div class="bench-item-val">@lavieconstrucoes — 18 mil seguidores, 628 posts. Estética editorial coesa. Posts de manifesto textual com mesma frequência que renders arquitetônicos.</div>
+        </div>
+        <div class="bench-item">
+          <div class="bench-item-label">O que adaptar</div>
+          <div class="bench-item-val">Post começa com frase de posicionamento, não com preço. Nome do empreendimento carrega conceito. Paleta coesa em todos os pontos de contato.</div>
+        </div>
+        <div class="bench-item highlight-bad">
+          <div class="bench-item-label">✕ O que NÃO replicar</div>
+          <div class="bench-item-val">Paleta preta + dourada cria barreira psicológica de exclusão para público Faixa 2. Linguagem premium demais quebra a promessa de acolhimento.</div>
+        </div>
+        <div class="bench-item highlight-good">
+          <div class="bench-item-label">✦ Insight principal</div>
+          <div class="bench-item-val">A nova marca pode ser a <strong>primeira construtora MCMV de Maceió</strong> com integração verbal-visual consistente. O bar está baixo. A oportunidade é grande.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SÍNTESE COMPARATIVA -->
+  <section class="section" id="sintese">
+    <div class="section-num">04</div>
+    <h2 class="section-title">Síntese Comparativa</h2>
+    <p class="section-desc">Os quatro players lado a lado nos eixos mais relevantes para as decisões de naming e identidade visual.</p>
+
+    <div style="overflow-x:auto;border-radius:10px;border:1px solid var(--borda)">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Eixo</th>
+            <th><span style="color:var(--telesil)">●</span> Telesil</th>
+            <th><span style="color:var(--rocha)">●</span> Rocha</th>
+            <th><span style="color:var(--vella)">●</span> Vella</th>
+            <th><span style="color:#888)">●</span> Lavie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-eixo">Faixa MCMV</td>
+            <td>1, 2 e 3</td>
+            <td>2 e 3</td>
+            <td>Indefinido</td>
+            <td><em style="color:var(--cinza)">Não atua</em></td>
+          </tr>
+          <tr>
+            <td class="col-eixo">Cor dominante</td>
+            <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#F26522;margin-right:6px;vertical-align:middle"></span>Laranja #F26522</td>
+            <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#BE2E36;margin-right:6px;vertical-align:middle"></span>Vermelho #BE2E36</td>
+            <td><em style="color:var(--cinza)">Não identificada</em></td>
+            <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1C1C1C;margin-right:6px;vertical-align:middle"></span>Preto + laranja</td>
+          </tr>
+          <tr>
+            <td class="col-eixo">Tipo de logo</td>
+            <td>Wordmark caixa-alta</td>
+            <td>Wordmark caixa-baixa</td>
+            <td>Tipográfico</td>
+            <td>Tipográfico serifado</td>
+          </tr>
+          <tr>
+            <td class="col-eixo">Símbolo próprio</td>
+            <td><span class="badge" style="background:#FEF1E8;color:var(--telesil)">Sim</span></td>
+            <td><span class="badge" style="background:var(--rocha-bg);color:var(--rocha)">Sim</span></td>
+            <td><span class="badge" style="background:var(--vella-bg);color:var(--vella)">Tipográfico</span></td>
+            <td><span class="badge" style="background:var(--lavie-bg);color:var(--lavie)">Tipográfico</span></td>
+          </tr>
+          <tr>
+            <td class="col-eixo">Tom de voz</td>
+            <td>Institucional-paternal</td>
+            <td>Aspiracional</td>
+            <td><em style="color:var(--cinza)">Indefinido</em></td>
+            <td>Manifesto / conceitual</td>
+          </tr>
+          <tr>
+            <td class="col-eixo">Integr. verbal/visual</td>
+            <td><span class="badge" style="background:#FEF1E8;color:var(--telesil)">Baixa</span></td>
+            <td><span class="badge" style="background:#FFFBEA;color:#92600A">Média</span></td>
+            <td><span class="badge" style="background:var(--vella-bg);color:var(--vella)">Baixa</span></td>
+            <td><span class="badge" style="background:#E6F5EF;color:var(--teal)">Alta</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 05 LACUNAS -->
+  <section class="section" id="lacunas">
+    <div class="section-num">05</div>
+    <h2 class="section-title">Lacunas de Mercado Identificadas</h2>
+    <p class="section-desc">Territórios visuais e estratégicos completamente disponíveis. São lacunas de criação, não de competição.</p>
+
+    <div class="lacuna-list">
+      <div class="lacuna" style="border-left:4px solid var(--teal)">
+        <div class="lacuna-num" style="color:var(--teal)">01</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de cor</h4>
+          <p>Laranja (Telesil), Vermelho (Rocha) e Preto/laranja (Lavie) cobrem o espectro tradicional. Nenhum player usa verde contemporâneo, terracota quente ou azul petróleo. Toda a faixa de cores "humanas e próximas" está disponível.</p>
+        </div>
+      </div>
+      <div class="lacuna" style="border-left:4px solid var(--acento)">
+        <div class="lacuna-num" style="color:var(--acento)">02</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de símbolo</h4>
+          <p>100% dos players são wordmarks puros. Nenhuma das quatro marcas tem símbolo proprietário. Ter um símbolo geométrico que funcione sozinho — em placa de obra, sticker, favicon, uniforme — já é diferenciação imediata e sem concorrência.</p>
+        </div>
+      </div>
+      <div class="lacuna" style="border-left:4px solid var(--teal)">
+        <div class="lacuna-num" style="color:var(--teal)">03</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de tipografia</h4>
+          <p>Serifadas pesadas (Telesil) ou finas (Rocha, Lavie) dominam. Nenhum player usa sans-serif geométrica humanista moderna — Inter, Sora, Manrope, DM Sans — que é exatamente a estética que o público Faixa 2 já consome em apps e fintechs.</p>
+        </div>
+      </div>
+      <div class="lacuna" style="border-left:4px solid var(--acento)">
+        <div class="lacuna-num" style="color:var(--acento)">04</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de estética digital</h4>
+          <p>Todos têm sites funcionais mas sem ambição visual. Nenhum tem a estética que o público-alvo já consome (Nubank, Quinto Andar, iFood). O público Faixa 2 está no digital — e a estética esperada por ele não existe no mercado imobiliário local.</p>
+        </div>
+      </div>
+      <div class="lacuna" style="border-left:4px solid var(--teal)">
+        <div class="lacuna-num" style="color:var(--teal)">05</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de naming de empreendimento</h4>
+          <p>Natureza aspiracional (Reserva, Jardim, Parque) domina. A Rocha experimenta com anglicismos (Easy). Ninguém usa naming emocional direto conectado à experiência do cliente — Primeiro, Chega, Porto, Lar, Passo.</p>
+        </div>
+      </div>
+      <div class="lacuna" style="border-left:4px solid var(--acento)">
+        <div class="lacuna-num" style="color:var(--acento)">06</div>
+        <div class="lacuna-body">
+          <h4>Lacuna de integração verbal/visual</h4>
+          <p>Apenas a Lavie integra tom de voz e visual com consistência — e ela não compete no MCMV. No segmento popular local, verbal e visual operam completamente desconectados. A nova marca pode ser a primeira a unir os dois.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDENTIDADE VISUAL: SEÇÃO CABEÇALHO -->
+  <section class="section" style="background:var(--preto);color:var(--branco);border-bottom:none">
+    <div class="section-num" style="color:var(--acento)">Análise Especial</div>
+    <h2 class="section-title" style="color:var(--branco)">Identidade Visual<br><em style="font-family:'DM Serif Display',serif;font-style:italic;color:var(--acento)">dos Concorrentes</em></h2>
+    <p style="font-size:15px;color:rgba(255,255,255,.55);max-width:660px;line-height:1.65">Destrinchamento completo da linguagem visual de cada player — cores, tipografia, logo, estilo e o que cada decisão criativa comunica sobre a marca. Foco no que está disponível para a nova construtora ocupar.</p>
+  </section>
+
+  <!-- IV TELESIL -->
+  <section class="section" id="iv-telesil" style="background:var(--telesil-bg)">
+    <div class="section-num" style="color:var(--telesil)">Identidade Visual</div>
+    <h2 class="section-title">Telesil <span style="color:var(--telesil)">Engenharia</span></h2>
+
+    <div class="id-visual-grid">
+      <div class="iv-card">
+        <div class="iv-header" style="background:var(--telesil)">
+          <div class="iv-header-brand">Telesil · Identidade Visual</div>
+          <div class="iv-header-name" style="font-family:'DM Serif Display',serif;font-size:36px;letter-spacing:.02em">TELESIL</div>
+          <div class="iv-header-tags">
+            <span class="iv-tag">Wordmark</span>
+            <span class="iv-tag">Caixa-alta</span>
+            <span class="iv-tag">Institucional</span>
+          </div>
+        </div>
+        <div class="logo-sim" style="background:var(--telesil-bg)">
+          <span class="logo-sim-text" style="font-family:'DM Sans',sans-serif;font-size:32px;font-weight:800;color:var(--telesil);letter-spacing:.08em;text-transform:uppercase">TELESIL</span>
+        </div>
+        <div style="padding:6px 16px 24px;background:var(--telesil-bg)">
+          <div style="font-size:11px;color:var(--cinza);font-family:'DM Mono',monospace">Simulação do logo — sem acesso ao arquivo original</div>
+        </div>
+        <div class="swatches-wrap" style="background:var(--branco)">
+          <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza2);font-family:'DM Mono',monospace;padding-top:16px;margin-bottom:10px">Paleta de cores</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#F26522" data-label="#F26522 · laranja"></div>
+            <div class="swatch" style="background:#1A3A5C" data-label="#1A3A5C · azul"></div>
+            <div class="swatch" style="background:#FFFFFF;border:1px solid #eee" data-label="#FFFFFF · branco"></div>
+            <div class="swatch" style="background:#333333" data-label="#333333 · carvão"></div>
+          </div>
+        </div>
+        <div class="iv-rows">
+          <div class="iv-row">
+            <div class="iv-row-key">Logo</div>
+            <div class="iv-row-val"><strong>Wordmark puro em caixa-alta.</strong> Lettering simétrico, peso alto, traço espesso. Zero reconhecimento sem o nome. A força vem da repetição, não da forma.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Tipografia</div>
+            <div class="iv-row-val">Sans-serif condensada bold no logo. Site usa Arial/Helvetica sem curadoria visível. Caixa-alta prevalece — tom de autoridade, não de proximidade.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Estilo geral</div>
+            <div class="iv-row-val">Institucional anos 2000. Fotos aéreas de obra, renders 3D, banners com subsídio em destaque. Muito texto, pouca hierarquia. Sensação de construtora pública.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Aplicação</div>
+            <div class="iv-row-val">Tapume de obra laranja, faixa de lona, outdoor, stand em shopping. Digital como extensão do físico — a marca foi pensada para o offline.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Naming</div>
+            <div class="iv-row-val">Natureza aspiracional: <em>Reserva dos Pássaros, Grand Reserva, Jardim São Gonçalo.</em> Padrão: Reserva/Jardim + substantivo da natureza. Previsível.</div>
+          </div>
+        </div>
+        <div class="iv-verdict" style="background:#FEF8F3;border-top:1px solid var(--borda)">
+          <div class="iv-verdict-icon">⚠</div>
+          <div style="font-size:13px;color:var(--cinza);line-height:1.6"><strong style="color:var(--preto)">Lacuna:</strong> A cor laranja saturou o mercado local — é ubíqua, não exclusiva. Sem símbolo, zero reconhecimento sem o nome. Digital sem direção criativa consistente. Não fala a língua do público jovem Faixa 2.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--telesil);font-weight:600;margin-bottom:12px">Depoimento real sobre a marca</div>
+          <blockquote style="font-family:'DM Serif Display',serif;font-size:18px;line-height:1.5;color:var(--preto);border-left:3px solid var(--telesil);padding-left:16px;margin-bottom:10px">"Por vários lugares que eu passo, vejo muros pintados de laranja com a marca da Telesil e isso me passou credibilidade."</blockquote>
+          <p style="font-size:12px;color:var(--cinza)">Cliente Telesil — depoimento publicado no site oficial</p>
+          <p style="font-size:13px;color:var(--cinza);margin-top:10px;line-height:1.6">Esse depoimento revela que o principal ativo de identidade da Telesil <strong>não é o logo — é a cor.</strong> A repetição física em obra por obra criou reconhecimento de marca sem símbolo. A nova construtora pode fazer o mesmo com uma cor que ainda não está ocupada.</p>
+        </div>
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--telesil);font-weight:600;margin-bottom:12px">Pontuação por eixo</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Reconhecimento de marca</span><span style="font-weight:600">9/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:90%;height:100%;background:var(--telesil);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Modernidade visual</span><span style="font-weight:600">3/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:30%;height:100%;background:var(--telesil);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Integração verbal/visual</span><span style="font-weight:600">2/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:20%;height:100%;background:var(--telesil);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Digital-first</span><span style="font-weight:600">4/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:40%;height:100%;background:var(--telesil);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Humanidade / proximidade</span><span style="font-weight:600">3/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:30%;height:100%;background:var(--telesil);border-radius:3px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV ROCHA -->
+  <section class="section" id="iv-rocha" style="background:var(--rocha-bg)">
+    <div class="section-num" style="color:var(--rocha)">Identidade Visual</div>
+    <h2 class="section-title">Rocha <span style="color:var(--rocha)">Empreendimentos</span></h2>
+
+    <div class="id-visual-grid">
+      <div class="iv-card">
+        <div class="iv-header" style="background:var(--rocha)">
+          <div class="iv-header-brand">Rocha · Identidade Visual</div>
+          <div class="iv-header-name" style="font-family:'DM Serif Display',serif;font-size:44px;font-weight:400;letter-spacing:.01em">rocha</div>
+          <div class="iv-header-tags">
+            <span class="iv-tag">Wordmark caixa-baixa</span>
+            <span class="iv-tag">Serifada fina</span>
+            <span class="iv-tag">Aspiracional</span>
+          </div>
+        </div>
+        <div class="logo-sim" style="background:var(--rocha-bg)">
+          <span class="logo-sim-text" style="font-family:'DM Serif Display',serif;font-size:40px;font-weight:400;color:var(--rocha);letter-spacing:.01em">rocha</span>
+        </div>
+        <div style="padding:4px 16px 20px;background:var(--rocha-bg)">
+          <div style="font-size:11px;color:var(--cinza);font-family:'DM Mono',monospace">Caixa-baixa — decisão deliberada de modernidade</div>
+        </div>
+        <div class="swatches-wrap" style="background:var(--branco)">
+          <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza2);font-family:'DM Mono',monospace;padding-top:16px;margin-bottom:10px">Paleta de cores · confirmada via theme-color</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#BE2E36" data-label="#BE2E36 · vermelho"></div>
+            <div class="swatch" style="background:#2C2C2C" data-label="#2C2C2C · carvão"></div>
+            <div class="swatch" style="background:#FFFFFF;border:1px solid #eee" data-label="#FFFFFF · branco"></div>
+            <div class="swatch" style="background:#F0EDE8" data-label="#F0EDE8 · creme"></div>
+          </div>
+        </div>
+        <div class="iv-rows">
+          <div class="iv-row">
+            <div class="iv-row-key">Logo</div>
+            <div class="iv-row-val"><strong>Wordmark em caixa-baixa</strong> — a melhor decisão de logo do grupo. Sinaliza modernidade e aproximação. Marca que não precisa gritar para ser levada a sério.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Tipografia</div>
+            <div class="iv-row-val">Serifada fina no logo — estilo editorial/magazine. Empreendimentos em caixa-alta bold (EASY SERRARIA) — bom contraste com a suavidade da marca-mãe.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Estilo geral</div>
+            <div class="iv-row-val">Mais limpo que a Telesil. Espaço em branco, fotos de fachada e amenities — piscina, coworking, gourmet. Aspiracional dentro das convenções do setor.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Naming</div>
+            <div class="iv-row-val">Dois sistemas: lifestyle anglicizado (<em>Easy, Eco</em>) e natureza aspiracional (<em>Vittá, Reserva</em>). O mais sofisticado do grupo — mas ainda inconsistente entre si.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Destaque</div>
+            <div class="iv-row-val"><strong>meurocha.com.br</strong> — pronome possessivo que transforma sobrenome em pertencimento. Decisão de naming estratégico que a nova marca pode aprender e superar.</div>
+          </div>
+        </div>
+        <div class="iv-verdict" style="background:#FDF8F8;border-top:1px solid var(--borda)">
+          <div class="iv-verdict-icon">⚠</div>
+          <div style="font-size:13px;color:var(--cinza);line-height:1.6"><strong style="color:var(--preto)">Lacuna:</strong> Vermelho como cor primária pode criar barreira psicológica em público que busca acolhimento. Sem símbolo. A promessa "Premium" não está sustentada com consistência visual suficiente.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rocha);font-weight:600;margin-bottom:12px">Decisão de marca que se destaca</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--preto);margin-bottom:10px">meurocha.com.br</div>
+          <p style="font-size:13px;color:var(--cinza);line-height:1.6">O domínio <strong>meurocha.com.br</strong> e o handle <strong>@meu.rocha</strong> transformam um sobrenome em pronome possessivo. "Meu Rocha" cria pertencimento instantâneo — o cliente não compra de uma empresa, compra do seu Rocha. É uma tática de naming que a nova marca pode superar com um conceito ainda mais próximo do cliente Faixa 2.</p>
+        </div>
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rocha);font-weight:600;margin-bottom:12px">Pontuação por eixo</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Reconhecimento de marca</span><span style="font-weight:600">6/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:60%;height:100%;background:var(--rocha);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Modernidade visual</span><span style="font-weight:600">6/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:60%;height:100%;background:var(--rocha);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Integração verbal/visual</span><span style="font-weight:600">4/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:40%;height:100%;background:var(--rocha);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Digital-first</span><span style="font-weight:600">4/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:40%;height:100%;background:var(--rocha);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Humanidade / proximidade</span><span style="font-weight:600">5/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:50%;height:100%;background:var(--rocha);border-radius:3px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV VELLA -->
+  <section class="section" id="iv-vella" style="background:var(--vella-bg)">
+    <div class="section-num" style="color:var(--vella)">Identidade Visual</div>
+    <h2 class="section-title">Vella <span style="color:var(--vella)">Engenharia</span></h2>
+
+    <div class="id-visual-grid">
+      <div class="iv-card">
+        <div class="iv-header" style="background:var(--vella)">
+          <div class="iv-header-brand">Vella · Identidade Visual</div>
+          <div class="iv-header-name" style="font-family:'DM Serif Display',serif;font-size:38px;letter-spacing:.06em">VELLA</div>
+          <div class="iv-header-tags">
+            <span class="iv-tag">Não documentada</span>
+            <span class="iv-tag">Inferida</span>
+            <span class="iv-tag">Alto potencial</span>
+          </div>
+        </div>
+        <div class="logo-sim" style="background:var(--vella-bg)">
+          <span class="logo-sim-text" style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--vella);letter-spacing:.06em;opacity:.4">VELLA</span>
+        </div>
+        <div style="padding:4px 16px 20px;background:var(--vella-bg)">
+          <div style="font-size:11px;color:var(--cinza);font-family:'DM Mono',monospace">Logo não documentado — representação inferida</div>
+        </div>
+        <div class="swatches-wrap" style="background:var(--branco)">
+          <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza2);font-family:'DM Mono',monospace;padding-top:16px;margin-bottom:10px">Paleta — não identificada</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#5A5650;opacity:.5" data-label="inferido"></div>
+            <div class="swatch" style="background:#FFFFFF;border:1px solid #eee;opacity:.5" data-label="inferido"></div>
+            <div class="swatch" style="background:#B8B4AE;opacity:.5" data-label="inferido"></div>
+            <div class="swatch" style="background:#EEECEA;opacity:.5" data-label="inferido"></div>
+          </div>
+        </div>
+        <div class="iv-rows">
+          <div class="iv-row">
+            <div class="iv-row-key">Situação</div>
+            <div class="iv-row-val">Identidade visual não documentada publicamente. Instagram inacessível para análise. Sem site, sem portfólio, sem materiais indexados.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">O paradoxo</div>
+            <div class="iv-row-val"><strong>"Vella" é o melhor nome fonético do grupo:</strong> 2 sílabas, abertura com V, raiz latina/italiana (vela, bela). Um nome que poderia sustentar uma marca premium — e ninguém construiu isso.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Potencial</div>
+            <div class="iv-row-val">Uma vela estilizada, um V geométrico ou forma que remeta a movimento teria alto potencial. A marca tem o ingrediente mais difícil e desperdiça o ativo.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Aprendizado</div>
+            <div class="iv-row-val">Ter o melhor nome não basta. A Vella demonstra que um nome forte sem investimento em marca é patrimônio que dorme. Identidade é construção — não um evento único.</div>
+          </div>
+        </div>
+        <div class="iv-verdict" style="background:#F5F3F0;border-top:1px solid var(--borda)">
+          <div class="iv-verdict-icon">⚡</div>
+          <div style="font-size:13px;color:var(--cinza);line-height:1.6"><strong style="color:var(--preto)">Risco latente:</strong> Se a Vella investir em identidade nos próximos 12–18 meses, pode ocupar rapidamente o território da nova marca. O bar está baixo — mas a janela de resposta é curta.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--branco);border-radius:12px;padding:24px;border:1px solid var(--borda);height:fit-content">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--vella);font-weight:600;margin-bottom:16px">O que o nome "Vella" poderia ser</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="padding:14px;background:var(--areia);border-radius:8px">
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:4px">Vela como símbolo</div>
+            <p style="font-size:12px;color:var(--cinza);line-height:1.5">A vela náutica evoca movimento, direção e chegada — campo semântico perfeito para uma construtora. A Marinha italiana usa vela como símbolo de excelência e precisão.</p>
+          </div>
+          <div style="padding:14px;background:var(--areia);border-radius:8px">
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:4px">Vella como feminino</div>
+            <p style="font-size:12px;color:var(--cinza);line-height:1.5">Em italiano, "bella" (bela) aproxima-se de "vella" sonoricamente. Uma marca com essa ressonância poderia evocar beleza arquitetônica sem ser explícita.</p>
+          </div>
+          <div style="padding:14px;background:var(--areia);border-radius:8px">
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:4px">O que foi desperdiçado</div>
+            <p style="font-size:12px;color:var(--cinza);line-height:1.5">Dois sílabas, zero colisão de marca, sonoridade internacional, raiz semântica densa. A Vella tinha tudo para ser referência visual no mercado local — e escolheu a invisibilidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV LAVIE -->
+  <section class="section" id="iv-lavie" style="background:var(--lavie-bg)">
+    <div class="section-num" style="color:var(--lavie)">Identidade Visual · Referência</div>
+    <h2 class="section-title">Lavie <span style="color:var(--lavie)">Construções</span></h2>
+
+    <div class="id-visual-grid">
+      <div class="iv-card">
+        <div class="iv-header" style="background:var(--lavie)">
+          <div class="iv-header-brand">Lavie · Alto Padrão · João Pessoa-PB</div>
+          <div class="iv-header-name" style="font-family:'DM Serif Display',serif;font-size:38px;letter-spacing:.16em;font-weight:300;color:#E87722">LAVIE</div>
+          <div class="iv-header-tags">
+            <span class="iv-tag">Wordmark serifada</span>
+            <span class="iv-tag">Preto + laranja</span>
+            <span class="iv-tag">Manifesto-first</span>
+          </div>
+        </div>
+        <div class="logo-sim" style="background:#1C1C1C">
+          <span class="logo-sim-text" style="font-family:'DM Serif Display',serif;font-size:36px;font-weight:300;color:#E87722;letter-spacing:.18em">LAVIE</span>
+        </div>
+        <div style="padding:4px 16px 20px;background:#1C1C1C">
+          <div style="font-size:11px;color:rgba(255,255,255,.35);font-family:'DM Mono',monospace">Preto + laranja — linguagem de alto padrão</div>
+        </div>
+        <div class="swatches-wrap" style="background:var(--branco)">
+          <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza2);font-family:'DM Mono',monospace;padding-top:16px;margin-bottom:10px">Paleta de cores</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#1C1C1C" data-label="#1C1C1C · preto"></div>
+            <div class="swatch" style="background:#E87722" data-label="#E87722 · laranja"></div>
+            <div class="swatch" style="background:#F5F0E8" data-label="#F5F0E8 · marfim"></div>
+            <div class="swatch" style="background:#8A7B65" data-label="#8A7B65 · marrom"></div>
+          </div>
+        </div>
+        <div class="iv-rows">
+          <div class="iv-row">
+            <div class="iv-row-key">Logo</div>
+            <div class="iv-row-val"><strong>Wordmark display refinado.</strong> Caixa-alta, tracking generoso, serifada fina. A tipografia é o símbolo — não existe adorno gráfico adicional. A forma da letra sustenta a identidade sozinha.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Tipografia</div>
+            <div class="iv-row-val">Serifada display (estilo Didot/Bodoni): alto contraste entre traços finos e espessos. Corpo em sans-serif leve. Espaçamento generoso em todos os elementos.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Estilo geral</div>
+            <div class="iv-row-val">O mais sofisticado do grupo. Fotografias de interiores de alto padrão, direção de arte coesa, paleta de imagem quente e controlada. Manifesto textual com mesma frequência que renders.</div>
+          </div>
+          <div class="iv-row">
+            <div class="iv-row-key">Integração</div>
+            <div class="iv-row-val"><em>"Construir prédio é técnica. Construir Lavie é propósito."</em> Verbal e visual se alinham perfeitamente — o único player onde tirar o logo não quebra a identidade.</div>
+          </div>
+        </div>
+        <div class="iv-verdict" style="background:#F5F5F3;border-top:1px solid var(--borda)">
+          <div class="iv-verdict-icon">✦</div>
+          <div style="font-size:13px;color:var(--cinza);line-height:1.6"><strong style="color:var(--preto)">Aprender, não copiar:</strong> A lógica de manifesto + produto, a integração verbal/visual e o início do post com frase de posicionamento. Adaptar para o público Faixa 2 — mesma estrutura, paleta e linguagem acessíveis.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lavie);font-weight:600;margin-bottom:12px">Manifesto da marca</div>
+          <blockquote style="font-family:'DM Serif Display',serif;font-size:17px;line-height:1.6;color:var(--preto);border-left:3px solid #E87722;padding-left:16px;margin-bottom:10px">"Construir prédio é técnica.<br>Construir Lavie é propósito."</blockquote>
+          <p style="font-size:13px;color:var(--cinza);line-height:1.6">Essa frase sintetiza a filosofia de integração verbal-visual da Lavie. O objetivo para a nova marca é alcançar esse nível de coesão — mas com linguagem que inclua, não que exclua. Que diga "esse espaço foi feito pra mim" ao público Faixa 2.</p>
+        </div>
+        <div style="background:var(--branco);border-radius:12px;padding:20px;border:1px solid var(--borda)">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lavie);font-weight:600;margin-bottom:12px">Pontuação por eixo</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Reconhecimento de marca</span><span style="font-weight:600">7/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:70%;height:100%;background:#1C1C1C;border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Modernidade visual</span><span style="font-weight:600">9/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:90%;height:100%;background:#1C1C1C;border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Integração verbal/visual</span><span style="font-weight:600">10/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:100%;height:100%;background:#E87722;border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Humanidade / proximidade</span><span style="font-weight:600">4/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:40%;height:100%;background:#1C1C1C;border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Acessibilidade ao Faixa 2</span><span style="font-weight:600">1/10</span></div>
+              <div style="height:5px;background:#F0EBE1;border-radius:3px"><div style="width:10%;height:100%;background:#1C1C1C;border-radius:3px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- FOOTER -->
+  <div class="footer-section">
+    <strong>RODRI Brand Studio</strong> · Clareza é o novo luxo.<br>
+    MÉTODO VISION® · Fase 2 concluída · Próxima entrega: NAMI · Maio 2026
+  </div>
+
+</main>
+
+<script>
+  // Mobile sidebar toggle
+  const ham = document.getElementById('ham');
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.getElementById('overlay');
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    ham.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+  ham.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    ham.classList.toggle('open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+  });
+  overlay.addEventListener('click', closeSidebar);
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if(window.innerWidth <= 768) closeSidebar();
+    });
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const player = tab.dataset.player;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.player-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + player).classList.add('active');
+    });
+  });
+
+  // Nav active on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        navItems.forEach(n => n.classList.remove('active'));
+        const active = document.querySelector('.nav-item[href="#' + entry.target.id + '"]');
+        if(active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
